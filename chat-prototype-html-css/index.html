@@ -50,7 +50,7 @@
         chat-window {
             display: flex;
             flex-direction: column;
-            flex: 1;
+            flex: 0 1 calc(100% - 140px);
             width: 100%;
             background: #f0f0f0;
             border: 1px solid #ccc;
@@ -112,6 +112,17 @@
         button:hover {
             background: #ccc;
         }
+
+        .chat-footer {
+            background: #fff8e1;
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+            border-top: 1px solid #eee;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
     </style>
 </head>
 <body>
@@ -131,6 +142,9 @@
         <input type="text" placeholder="Type a message" id="messageBox" autocomplete="off" />
         <button id="sendBtn" type="button">Send</button>
     </form>
+    <footer class="chat-footer">
+        <span>💡 This is a static HTML/CSS demonstration. The input is disabled. See other approaches for interactive versions.</span>
+    </footer>
 </chat-widget>
 </body>
 </html>
