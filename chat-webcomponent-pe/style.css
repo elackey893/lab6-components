@@ -8,7 +8,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-chat-widget {
+simple-chat {
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -18,75 +18,48 @@ chat-widget {
     overflow: hidden;
 }
 
-.chat-header {
-    background: #4a90e2;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.chat-header h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.chat-header p {
-    margin: 0.25rem 0 0;
-    font-size: 0.9rem;
-    opacity: 0.9;
-}
-
-chat-window {
-    display: flex;
-    flex-direction: column;
-    flex: 0 1 calc(100% - 140px);
-    width: 100%;
+.messages {
+    flex: 1;
     background: #f0f0f0;
-    border: 1px solid #ccc;
     overflow-y: auto;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
-    box-sizing: border-box;
 }
 
-chat-window p {
-    margin: 0;
-    margin-bottom: 0.5rem;
+.message {
     padding: 0.75em 1em;
     border-radius: 24px;
-    max-width: calc(100% - 1rem);
-    width: fit-content;
+    max-width: 80%;
     word-wrap: break-word;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     position: relative;
+    margin-bottom: 0.5rem;
 }
 
-chat-window p.User {
+.message.user {
     background: #007AFF;
     color: white;
     align-self: flex-end;
     border-radius: 24px 24px 0 24px;
 }
 
-chat-window p.Bot {
+.message.bot {
     background: #fff;
     border: 1px solid #e0e0e0;
     align-self: flex-start;
     border-radius: 24px 24px 24px 0;
 }
 
-#chatForm {
+.input-area {
     display: flex;
     padding: 0.5em;
     background: #fff;
     border-top: 1px solid #ccc;
 }
 
-input[type="text"] {
+.input-area input[type="text"] {
     flex: 1;
     padding: 0.5em;
     border: 1px solid #ccc;
@@ -94,7 +67,7 @@ input[type="text"] {
     font-size: 1em;
 }
 
-button {
+.input-area button {
     margin-left: 0.5em;
     padding: 0.5em 1em;
     border: 1px solid #ccc;
@@ -102,17 +75,6 @@ button {
     background: #f0f0f0;
 }
 
-button:hover {
+.input-area button:hover {
     background: #ccc;
-}
-
-.chat-footer {
-    background: #fff8e1;
-    padding: 0.5rem;
-    text-align: center;
-    font-size: 0.8rem;
-    color: #666;
-    border-top: 1px solid #eee;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
 }

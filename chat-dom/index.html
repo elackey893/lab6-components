@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Manipulation Version</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<chat-widget>
+    <header class="chat-header">
+        <h1>Chat Assistant</h1>
+        <p>DOM Manipulation Version</p>
+    </header>
+    <chat-window id="chatWindow">
+        <!-- Messages added dynamically via JS -->
+    </chat-window>
+    <form id="chatForm">
+        <input type="text" placeholder="Type a message" id="messageBox" autocomplete="off" />
+        <button id="sendBtn" type="button">Send</button>
+    </form>
+    <footer class="chat-footer">
+        <span>💡 This is the DOM Manipulation version. Send messages to interact with Eliza!</span>
+    </footer>
+</chat-widget>
+<script type="module" src="script.js"></script>
 </body>
 </html>
