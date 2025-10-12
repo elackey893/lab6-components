@@ -18,6 +18,28 @@ simple-chat {
     overflow: hidden;
 }
 
+.chat-header {
+    background: #4a90e2;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.chat-header p {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
 .messages {
     flex: 1;
     background: #f0f0f0;
@@ -77,4 +99,15 @@ simple-chat {
 
 .input-area button:hover {
     background: #ccc;
+}
+
+.chat-footer {
+    background: #fff8e1;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #666;
+    border-top: 1px solid #eee;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
