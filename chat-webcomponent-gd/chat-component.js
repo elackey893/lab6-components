@@ -146,40 +146,40 @@ class ChatInterface extends HTMLElement {
     }
 
     setupEventListeners() {
-        const messages = this.shadowRoot.querySelector('.messages');
+        const msgs = this.shadowRoot.querySelector('.messages');
         const form = this.shadowRoot.querySelector('.input-area');
         const input = form.querySelector('input');
         const button = form.querySelector('button');
 
-        const sendMessage = (e) => {
+        const sendMsg = (e) => {
             e.preventDefault();
-            const message = input.value.trim();
-            if (!message) return;
+            const msg = input.value.trim();
+            if (!msg) return;
 
             input.value = '';
             input.focus();
 
-            this.addMessage(message, true); // User
-            this.addMessage(getBotResponse(message), false); // Bot
+            this.addMessage(msg, true);
+            this.addMessage(getBotResponse(msg), false);
         };
 
-        button.addEventListener('click', sendMessage);
+        button.addEventListener('click', sendMsg);
         input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage(e);
+            if (e.key === 'Enter') sendMsg(e);
         });
-        form.addEventListener('submit', sendMessage);
+        form.addEventListener('submit', sendMsg);
 
         // Initial greeting
         this.addMessage('Hello! How can I help you today?', false);
     }
 
     addMessage(text, isUser) {
-        const messages = this.shadowRoot.querySelector('.messages');
+        const msgs = this.shadowRoot.querySelector('.messages');
         const div = document.createElement('div');
         div.className = `message ${isUser ? 'user' : 'bot'}`;
         div.textContent = text;
-        messages.appendChild(div);
-        messages.scrollTop = messages.scrollHeight; // Auto-scroll
+        msgs.appendChild(div);
+        msgs.scrollTop = msgs.scrollHeight;
     }
 }
 

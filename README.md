@@ -3,7 +3,7 @@
 This repository demonstrates four different ways to build a simple Eliza-style chatbot interface, exploring component-based thinking in web development. Each approach builds the same chat UI (message bubbles, input form, pattern-matching responses) but with increasing levels of modularity, reusability, and encapsulation.
 
 ## Live Demo
-View the project on GitHub Pages: [https://evanlackey.github.io/lab6-components](https://evanlackey.github.io/lab6-components)  
+View the project on GitHub Pages: [https://evanlackey.github.io/lab6-components](https://elackey893.github.io/lab6-components/)  
 
 ## Project Structure
 - **Root**: `index.html` (navigation hub with links to all approaches).
