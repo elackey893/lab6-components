@@ -1,4 +1,5 @@
 import { getBotResponse } from './eliza.js';
+
 class ChatInterface extends HTMLElement {
     constructor() {
         super();
@@ -9,19 +10,27 @@ class ChatInterface extends HTMLElement {
         this.shadowRoot.innerHTML = `
       <style>
         :host {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: linear-gradient(180deg, #7b61ff, #5f80ff);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+          margin: 0;
+        }
+
+        .chat-widget {
           display: flex;
           flex-direction: column;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
           width: 400px;
           height: 600px;
           border: 1px solid #ccc;
           border-radius: 8px;
           overflow: hidden;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-          background: linear-gradient(180deg, #7b61ff, #5f80ff);
         }
 
         .chat-header {
@@ -118,32 +127,59 @@ class ChatInterface extends HTMLElement {
           border-bottom-right-radius: 8px;
         }
       </style>
-      <header class="chat-header">
-        <h1>Chat Assistant</h1>
-        <p>Web Component – Fully Encapsulated (Shadow DOM)</p>
-      </header>
-      <div class="messages"></div>
-      <form class="input-area">
-        <input type="text" placeholder="Type a message..." />
-        <button type="submit">Send</button>
-      </form>
-      <footer class="chat-footer">
-        <span>💡 This is the fully encapsulated Shadow DOM version. Fully self-contained!</span>
-      </footer>
+      <div class="chat-widget">
+        <header class="chat-header">
+          <h1>Chat Assistant</h1>
+          <p>Web Component – Fully Encapsulated (Shadow DOM)</p>
+        </header>
+        <div class="messages"></div>
+        <form class="input-area">
+          <input type="text" placeholder="Type a message..." />
+          <button type="submit">Send</button>
+        </form>
+        <footer class="chat-footer">
+          <span>💡 This is the fully encapsulated Shadow DOM version. Fully self-contained!</span>
+        </footer>
+      </div>
     `;
         this.setupEventListeners();
     }
 
     setupEventListeners() {
-        // Event handling
+        const messages = this.shadowRoot.querySelector('.messages');
+        const form = this.shadowRoot.querySelector('.input-area');
+        const input = form.querySelector('input');
+        const button = form.querySelector('button');
+
+        const sendMessage = (e) => {
+            e.preventDefault();
+            const message = input.value.trim();
+            if (!message) return;
+
+            input.value = '';
+            input.focus();
+
+            this.addMessage(message, true); // User
+            this.addMessage(getBotResponse(message), false); // Bot
+        };
+
+        button.addEventListener('click', sendMessage);
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage(e);
+        });
+        form.addEventListener('submit', sendMessage);
+
+        // Initial greeting
+        this.addMessage('Hello! How can I help you today?', false);
     }
 
     addMessage(text, isUser) {
-        // Message handling
-    }
-
-    getBotResponse(message) {
-        // Eliza logic
+        const messages = this.shadowRoot.querySelector('.messages');
+        const div = document.createElement('div');
+        div.className = `message ${isUser ? 'user' : 'bot'}`;
+        div.textContent = text;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight; // Auto-scroll
     }
 }
 
