@@ -22,15 +22,16 @@ function addToChatWindow(message, speaker) {
     p.className = speaker;
     p.textContent = message;
     chatWindow.appendChild(p);
-    chatWindow.scrollTop = chatWindow.scrollHeight; // Auto-scroll to bottom
+    chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
-function send() {
+function send(e) {
+    e.preventDefault(); // Stop form reload
     let messageBox = document.getElementById('messageBox');
     let message = messageBox.value.trim();
-    if (!message) return; // Skip empty messages
+    if (!message) return;
 
-    messageBox.value = ''; // Clear the field
+    messageBox.value = '';
     messageBox.focus();
 
     addToChatWindow(message, 'User');
@@ -40,16 +41,10 @@ function send() {
 function init() {
     log('Initializing DOM chat interface');
     const sendBtn = document.getElementById('sendBtn');
-    const messageBox = document.getElementById('messageBox');
+    const chatForm = document.getElementById('chatForm');
 
-    sendBtn.addEventListener('click', send);
-
-    // Enter key support
-    messageBox.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            send();
-        }
-    });
+    // Listen on form submit (handles button click + Enter)
+    chatForm.addEventListener('submit', send);
 
     // Initial bot greeting
     addToChatWindow("Hello! How can I help you today?", 'Bot');
