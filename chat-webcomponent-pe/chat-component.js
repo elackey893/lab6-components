@@ -2,44 +2,27 @@ import { getBotResponse } from './eliza.js';
 
 class SimpleChat extends HTMLElement {
     connectedCallback() {
-        const messages = this.querySelector('.messages');
+        const msgs = this.querySelector('.messages');
         const form = this.querySelector('.input-area');
         const input = form.querySelector('input');
-        const button = form.querySelector('button');
 
-        if (!messages || !form) return; // Bail if markup missing
-
-        const addMessage = (text, isUser) => {
+        const addMsg = (text, isUser) => {
             const div = document.createElement('div');
             div.className = `message ${isUser ? 'user' : 'bot'}`;
             div.textContent = text;
-            messages.appendChild(div);
-            messages.scrollTop = messages.scrollHeight; // Auto-scroll
+            msgs.appendChild(div);
+            msgs.scrollTop = msgs.scrollHeight;
         };
 
-        const sendMessage = (e) => {
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const message = input.value.trim();
-            if (!message) return;
-
-            input.value = ''; // Clear input
+            const msg = input.value.trim();
+            if (!msg) return;
+            input.value = '';
             input.focus();
-
-            addMessage(message, true); // User message
-            addMessage(getBotResponse(message), false); // Bot response
-        };
-
-        // Attach listeners
-        button.addEventListener('click', sendMessage);
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage(e);
+            addMsg(msg, true);
+            addMsg(getBotResponse(msg), false);
         });
-        form.addEventListener('submit', sendMessage);
-
-        // Initial greeting if no messages yet
-        if (messages.children.length === 0) {
-            addMessage('Hello! How can I help you?', false);
-        }
     }
 }
 
