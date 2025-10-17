@@ -146,7 +146,6 @@ class ChatInterface extends HTMLElement {
     }
 
     setupEventListeners() {
-        const msgs = this.shadowRoot.querySelector('.messages');
         const form = this.shadowRoot.querySelector('.input-area');
         const input = form.querySelector('input');
         const button = form.querySelector('button');
